@@ -24,9 +24,9 @@ cron.schedule("*/10 * * * *", () => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Keep-Alive Server is running");
+  res.send("Server is running");
 });
 
 app.listen(port, () => {
-  console.log(`Keep-Alive Server running at port:${port}`);
+  console.log(`Server running at port:${port}`);
 });
