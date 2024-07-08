@@ -8,19 +8,37 @@ const servers = [
   "https://insightengine.onrender.com/",
 ];
 
+let deployed = false; 
+
 const pingServers = async () => {
+  let success = true;
+
   for (const server of servers) {
     try {
       const res = await axios.get(server);
       console.log(`Successfully pinged: ${server}`);
     } catch (error) {
       console.error(`Error pinging ${server}: ${error.message}`);
+      success = false;
+      break;
     }
+  }
+
+  if (success) {
+    deployed = true; 
+  } else {
+    
+    console.log("Deployment failed. Stopping server.");
+    process.exit(1); 
   }
 };
 
 cron.schedule("*/10 * * * *", () => {
-  pingServers();
+  if (!deployed) {
+    pingServers();
+  } else {
+    console.log("Deployment already successful. Not pinging further.");
+  }
 });
 
 app.get("/", (req, res) => {
