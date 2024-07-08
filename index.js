@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const cron = require("node-cron");
 const app = express();
-const port = process.env.PORT || 4000;
+const port = 5646;
 
 const servers = [
   "https://insightengine.onrender.com/",
